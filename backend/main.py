@@ -134,7 +134,7 @@ def admin_update(data: dict):
         orders[order_id]["delivery"] = data["delivery"]
 
         save_orders(orders)
-         
+
         return {"status": "updated"}
 
     return {"error": "not found"} 
@@ -156,9 +156,3 @@ def add_section(section: dict):
         json.dump(data, f)
 
     return {"status": "ok"}
-
-
-        return {"status": "updated"}
-
-
-    return {"error": "not found"}
