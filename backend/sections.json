@@ -1,0 +1,12 @@
+[
+  {
+    "id": "courses",
+    "name": "Courses",
+    "enabled": true
+  },
+  {
+    "id": "ebooks",
+    "name": "E-Books",
+    "enabled": true
+  }
+]
