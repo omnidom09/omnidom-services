@@ -1,33 +1,33 @@
-function generateOrderId(){
-return "CF" + Math.floor(Math.random()*1000000)
-}
+async function loadServices(){
 
-let form = document.getElementById("orderForm")
+let r = await fetch("https://cashflow-inat.onrender.com/services")
 
-if(form){
+let data = await r.json()
 
-form.addEventListener("submit",function(e){
+let html = ""
 
-e.preventDefault()
+data.forEach(s=>{
 
-let orderId = generateOrderId()
+html += `
+<div class="card">
 
-localStorage.setItem("orderId",orderId)
+<h3>${s.name}</h3>
 
-window.location="payment.html"
+<p>${s.desc}</p>
+
+<p>Price: ₹${s.price}</p>
+
+<a href="order.html?service=${s.name}&price=${s.price}">
+<button>Order Now</button>
+</a>
+
+</div>
+`
 
 })
 
-}
-
-let btn = document.getElementById("whatsappBtn")
-
-if(btn){
-
-let orderId = localStorage.getItem("orderId")
-
-let msg = "Hello I completed payment for order "+orderId
-
-btn.href="https://wa.me/YOURNUMBER?text="+encodeURIComponent(msg)
+document.getElementById("servicesList").innerHTML = html
 
 }
+
+loadServices()
