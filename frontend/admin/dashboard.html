@@ -1,18 +1,77 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+
 <title>Admin Dashboard</title>
+
 <style>
-body{font-family:Arial;padding:20px}
-a{display:block;margin:10px 0}
+
+body{
+font-family:Arial;
+background:#f4f4f4;
+margin:0;
+padding:0;
+}
+
+header{
+background:black;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:40px;
+}
+
+.card{
+background:white;
+padding:20px;
+margin-bottom:20px;
+border-radius:8px;
+box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+
+button{
+padding:12px 20px;
+background:black;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+width:200px;
+}
+
+button:hover{
+background:#333;
+}
+
+a{
+text-decoration:none;
+}
+
 </style>
+
 </head>
 
 <body>
 
-<h1>Admin Panel</h1>
+<header>
 
-  <br><br>
+<h1>CashFlow72 Admin Panel</h1>
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Content Management</h2>
+
+<br>
 
 <a href="services-manager.html">
 <button>Manage Services</button>
@@ -30,24 +89,49 @@ a{display:block;margin:10px 0}
 <button>Manage E-Books</button>
 </a>
 
-<a href="services.html">Manage Services</a>
-<a href="sections.html">Manage Sections</a>
-<a href="payments.html">Payment Methods</a>
+</div>
 
-<button onclick="logout()">Logout</button>
 
-<script>
+<div class="card">
 
-if(localStorage.getItem("admin")!=="true"){
-window.location="login.html"
-}
+<h2>Orders</h2>
 
-function logout(){
-localStorage.removeItem("admin")
-window.location="login.html"
-}
+<br>
 
-</script>
+<a href="orders.html">
+<button>View Orders</button>
+</a>
+
+</div>
+
+
+<div class="card">
+
+<h2>Payments</h2>
+
+<br>
+
+<a href="payments.html">
+<button>Manage Payment Methods</button>
+</a>
+
+</div>
+
+
+<div class="card">
+
+<h2>Website Settings</h2>
+
+<br>
+
+<a href="../index.html">
+<button>View Website</button>
+</a>
+
+</div>
+
+</div>
 
 </body>
+
 </html>
