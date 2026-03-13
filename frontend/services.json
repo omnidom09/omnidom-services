@@ -1,0 +1,17 @@
+[
+{
+"id":1,
+"name":"Business Idea Validation",
+"description":"Professional validation of your business idea",
+"price":499,
+"enabled":true
+},
+
+{
+"id":2,
+"name":"Market Research Report",
+"description":"Complete market demand analysis",
+"price":999,
+"enabled":true
+}
+]
