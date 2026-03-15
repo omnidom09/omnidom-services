@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Manage Ebooks</title>
+</head>
+
+<body>
+
+<h2>Manage E-Books</h2>
+
+<div id="ebookList"></div>
+
+<h3>Add E-Book</h3>
+
+<input id="name" placeholder="Book Name">
+<input id="desc" placeholder="Description">
+<input id="price" placeholder="Price">
+
+<button onclick="addBook()">Add Book</button>
+
+<script>
+
+async function loadBooks(){
+
+let r = await fetch("../ebooks.json")
+let data = await r.json()
+
+let html=""
+
+data.forEach((b,i)=>{
+
+html+=`
+<div>
+<b>${b.name}</b> - ₹${b.price}
+
+<button onclick="deleteBook(${i})">Delete</button>
+
+</div>
+`
+
+})
+
+document.getElementById("ebookList").innerHTML=html
+
+}
+
+loadBooks()
+
+function addBook(){
+alert("Add ebook placeholder")
+}
+
+function deleteBook(){
+alert("Delete ebook placeholder")
+}
+
+</script>
+
+</body>
+
+</html>

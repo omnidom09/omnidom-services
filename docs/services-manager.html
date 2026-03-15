@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Manage Services</title>
+</head>
+
+<body>
+
+<h2>Manage Services</h2>
+
+<div id="serviceList"></div>
+
+<h3>Add New Service</h3>
+
+<input id="name" placeholder="Service Name">
+<input id="desc" placeholder="Description">
+<input id="price" placeholder="Price">
+
+<button onclick="addService()">Add Service</button>
+
+<script>
+
+async function loadServices(){
+
+let r = await fetch("../services.json")
+let data = await r.json()
+
+let html=""
+
+data.forEach((s,i)=>{
+
+html+=`
+<div>
+<b>${s.name}</b> - ₹${s.price}
+
+<button onclick="deleteService(${i})">Delete</button>
+
+</div>
+`
+
+})
+
+document.getElementById("serviceList").innerHTML=html
+
+}
+
+loadServices()
+
+function addService(){
+
+alert("New service added (local demo). Upload updated JSON to GitHub to publish.")
+
+}
+
+function deleteService(){
+
+alert("Delete feature placeholder.")
+
+}
+
+</script>
+
+</body>
+
+</html>

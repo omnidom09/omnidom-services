@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Manage Courses</title>
+</head>
+
+<body>
+
+<h2>Manage Courses</h2>
+
+<div id="courseList"></div>
+
+<h3>Add Course</h3>
+
+<input id="name" placeholder="Course Name">
+<input id="desc" placeholder="Description">
+<input id="price" placeholder="Price">
+
+<button onclick="addCourse()">Add Course</button>
+
+<script>
+
+async function loadCourses(){
+
+let r = await fetch("../courses.json")
+let data = await r.json()
+
+let html=""
+
+data.forEach((c,i)=>{
+
+html+=`
+<div>
+<b>${c.name}</b> - ₹${c.price}
+
+<button onclick="deleteCourse(${i})">Delete</button>
+
+</div>
+`
+
+})
+
+document.getElementById("courseList").innerHTML=html
+
+}
+
+loadCourses()
+
+function addCourse(){
+alert("Add course feature placeholder")
+}
+
+function deleteCourse(){
+alert("Delete course placeholder")
+}
+
+</script>
+
+</body>
+
+</html>

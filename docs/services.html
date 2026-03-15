@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Services</title>
+<style>
+body{font-family:Arial;padding:20px}
+input,textarea{width:100%;margin:5px 0;padding:8px}
+button{padding:10px}
+.card{border:1px solid #ddd;padding:10px;margin:10px 0}
+</style>
+</head>
+
+<body>
+
+<h2>Add Service</h2>
+
+<input id="name" placeholder="Service name">
+<textarea id="desc" placeholder="Description"></textarea>
+<input id="price" placeholder="Price">
+<input id="bg" placeholder="Background image URL">
+<input id="img" placeholder="Profile image URL">
+
+<button onclick="addService()">Add</button>
+
+<h2>Services</h2>
+
+<div id="list"></div>
+
+<script>
+
+const API="https://cashflow-inat.onrender.com"
+
+async function load(){
+
+let r=await fetch(API+"/services")
+let data=await r.json()
+
+let html=""
+
+data.forEach(s=>{
+
+html+=`
+<div class="card">
+<h3>${s.name}</h3>
+<p>${s.price}</p>
+<button onclick="deleteService('${s.id}')">Delete</button>
+</div>
+`
+
+})
+
+document.getElementById("list").innerHTML=html
+
+}
+
+async function addService(){
+
+let body={
+name:document.getElementById("name").value,
+desc:document.getElementById("desc").value,
+price:document.getElementById("price").value,
+bg:document.getElementById("bg").value,
+img:document.getElementById("img").value
+}
+
+await fetch(API+"/add-service",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify(body)
+})
+
+load()
+
+}
+
+async function deleteService(id){
+
+await fetch(API+"/delete-service/"+id,{method:"DELETE"})
+
+load()
+
+}
+
+load()
+
+</script>
+
+</body>
+</html>
