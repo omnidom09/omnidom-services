@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CashFlow72</title>
+</head>
+<body style="font-family: Arial; padding:20px;">
+
+<h1>CashFlow72</h1>
+<h2>From ₹0 to ₹100,000 in 72 Hours</h2>
+
+<div id="services"></div>
+
+<hr/>
+
+<h3>Payment Details</h3>
+<div id="payment"></div>
+
+<hr/>
+
+<h3>Track Order</h3>
+<input id="trackId" placeholder="Enter Order ID"/>
+<button onclick="trackOrder()">Track</button>
+<div id="result"></div>
+
+<script>
+
+const API = "http://127.0.0.1:8000"
+
+fetch(API + "/services")
+.then(res=>res.json())
+.then(data=>{
+
+let html=""
+
+data.forEach(s=>{
+
+html += `
+<div style="border:1px solid gray; padding:10px; margin:10px;">
+<h4>${s.name}</h4>
+<p>₹${s.price}</p>
+<p>${s.delivery}</p>
+<button onclick="order('${s.name}')">Order</button>
+</div>
+`
+
+})
+
+document.getElementById("services").innerHTML = html
+
+})
+
+fetch(API + "/payment")
+.then(res=>res.json())
+.then(data=>{
+document.getElementById("payment").innerHTML =
+`UPI: ${data.upi}<br/>Phone: ${data.phone}`
+})
+
+function order(service){
+
+let name = prompt("Enter your name")
+let email = prompt("Enter your email")
+let req = prompt("Describe requirement")
+
+fetch(API + "/order",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({
+name,
+email,
+service,
+requirement:req
+})
+})
+.then(res=>res.json())
+.then(data=>{
+alert("Order Created: " + data.order_id)
+})
+
+}
+
+function trackOrder(){
+
+let id = document.getElementById("trackId").value
+
+fetch(API + "/order/"+id)
+.then(res=>res.json())
+.then(data=>{
+document.getElementById("result").innerHTML =
+JSON.stringify(data)
+})
+
+}
+
+</script>
+
+</body>
+</html>
